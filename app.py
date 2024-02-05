@@ -1,7 +1,6 @@
 import requests
 import pandas as pd
 from bs4 import BeautifulSoup
-from datetime import datetime
 import re
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
@@ -62,11 +61,7 @@ def get_reviews_data(html_data):
             title = box.select_one('[data-hook="review-title"]').text.strip()
         except Exception as e:
             title = 'N/A'
-        try:
-            datetime_str = box.select_one('[data-hook="review-date"]').text.strip().split(' on ')[-1]
-            date = datetime.strptime(datetime_str, '%B %d, %Y').strftime("%d/%m/%Y")
-        except Exception as e:
-            date = 'N/A'
+      
         try:
             description = box.select_one('[data-hook="review-body"]').text.strip()
         except Exception as e:
